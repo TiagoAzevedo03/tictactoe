@@ -41,31 +41,31 @@ void set0(){
 	} 
 	
 	squares[0].setString("a");
-	squares[0].setPosition(40, 40);
+	squares[0].setPosition(70, 50);
 	
 	squares[1].setString("b");
-	squares[1].setPosition(240, 40);
+	squares[1].setPosition(270, 50);
 	
 	squares[2].setString("c");
-	squares[2].setPosition(440, 40);
+	squares[2].setPosition(470, 50);
 	
 	squares[3].setString("d");
-	squares[3].setPosition(40, 240);
+	squares[3].setPosition(70, 250);
 	
 	squares[4].setString("e");
-	squares[4].setPosition(240, 240);
+	squares[4].setPosition(270, 250);
 	
 	squares[5].setString("f");
-	squares[5].setPosition(440, 240);
+	squares[5].setPosition(470, 250);
 	
 	squares[6].setString("g");
-	squares[6].setPosition(40, 440);
+	squares[6].setPosition(70, 450);
 	
 	squares[7].setString("h");
-	squares[7].setPosition(240, 440);
+	squares[7].setPosition(270, 450);
 	
 	squares[8].setString("i");
-	squares[8].setPosition(440, 440);
+	squares[8].setPosition(470, 450);
 	
 	count = 0;
 }
@@ -398,5 +398,4 @@ int main()
 
     return 0;
 }
-
 
