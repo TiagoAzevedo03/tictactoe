@@ -173,6 +173,7 @@ void setY(std::vector<int> possible){
 	else if (squares[2].getString() == "c" && squares[4].getString() == "X" && squares[6].getString() == "X") i = 2;
 	else if (squares[2].getString() == "X" && squares[4].getString() == "e" && squares[6].getString() == "X") i = 4;
 	else if (squares[2].getString() == "X" && squares[4].getString() == "X" && squares[6].getString() == "i") i = 8;
+	else if (squares[4].getString() == "e") i = 4;
 
 	squares[i].setString("O");
 	squares[i].setFillColor(Color::Red);
