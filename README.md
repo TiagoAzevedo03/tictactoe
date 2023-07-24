@@ -19,3 +19,7 @@ The game allows you to play against a friend on the same machine or against the 
 - Clone this repository to your local machine.
 - Open the project in your preferred C++ IDE or compile the source files using your C++ compiler with the appropriate SFML flags (-lsfml-graphics -lsfml-window -lsfml-system).
 - Run the compiled executable and you have an intuitive menu to select the game mode you want.
+
+</br>
+
+![image](https://github.com/TiagoAzevedo03/tictactoe/assets/93865782/2cbb6ccf-e1ea-4394-ac0f-162af2ed14a8)
