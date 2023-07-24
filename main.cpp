@@ -80,24 +80,40 @@ void setSquare(int i){
 	count++;
 }
 
-bool testWin(){
-	if (squares[0].getString() == squares[4].getString() && squares[0].getString() == squares[8].getString())
-		return true;
-	else if (squares[0].getString() == squares[1].getString() && squares[0].getString() == squares[2].getString())
-		return true;
-	else if (squares[2].getString() == squares[4].getString() && squares[2].getString() == squares[6].getString())
-		return true;
-	else if (squares[3].getString() == squares[4].getString() && squares[3].getString() == squares[5].getString())
-		return true;
-	else if (squares[6].getString() == squares[7].getString() && squares[6].getString() == squares[8].getString())
-		return true;
-	else if (squares[0].getString() == squares[3].getString() && squares[0].getString() == squares[6].getString())
-		return true;
-	else if (squares[1].getString() == squares[4].getString() && squares[1].getString() == squares[7].getString())
-		return true;
-	else if (squares[2].getString() == squares[5].getString() && squares[2].getString() == squares[8].getString())
-		return true;
-	else return false;
+int testWin(){
+	if (squares[0].getString() == squares[4].getString() && squares[0].getString() == squares[8].getString() && squares[0].getString() == "X")
+		return 1;
+	else if (squares[0].getString() == squares[1].getString() && squares[0].getString() == squares[2].getString() && squares[0].getString() == "X")
+		return 1;
+	else if (squares[2].getString() == squares[4].getString() && squares[2].getString() == squares[6].getString() && squares[2].getString() == "X")
+		return 1;
+	else if (squares[3].getString() == squares[4].getString() && squares[3].getString() == squares[5].getString() && squares[3].getString() == "X")
+		return 1;
+	else if (squares[6].getString() == squares[7].getString() && squares[6].getString() == squares[8].getString() && squares[6].getString() == "X")
+		return 1;
+	else if (squares[0].getString() == squares[3].getString() && squares[0].getString() == squares[6].getString() && squares[0].getString() == "X")
+		return 1;
+	else if (squares[1].getString() == squares[4].getString() && squares[1].getString() == squares[7].getString() && squares[1].getString() == "X")
+		return 1;
+	else if (squares[2].getString() == squares[5].getString() && squares[2].getString() == squares[8].getString() && squares[2].getString() == "X")
+		return 1;
+	else if (squares[0].getString() == squares[4].getString() && squares[0].getString() == squares[8].getString() && squares[0].getString() == "O")
+		return 2;
+	else if (squares[0].getString() == squares[1].getString() && squares[0].getString() == squares[2].getString() && squares[0].getString() == "O")
+		return 2;
+	else if (squares[2].getString() == squares[4].getString() && squares[2].getString() == squares[6].getString() && squares[2].getString() == "O")
+		return 2;
+	else if (squares[3].getString() == squares[4].getString() && squares[3].getString() == squares[5].getString() && squares[3].getString() == "O")
+		return 2;
+	else if (squares[6].getString() == squares[7].getString() && squares[6].getString() == squares[8].getString() && squares[6].getString() == "O")
+		return 2;
+	else if (squares[0].getString() == squares[3].getString() && squares[0].getString() == squares[6].getString() && squares[0].getString() == "O")
+		return 2;
+	else if (squares[1].getString() == squares[4].getString() && squares[1].getString() == squares[7].getString() && squares[1].getString() == "O")
+		return 2;
+	else if (squares[2].getString() == squares[5].getString() && squares[2].getString() == squares[8].getString() && squares[2].getString() == "O")
+		return 2;
+	else return 0;
 }
 
 void multiplayer(){
@@ -106,10 +122,7 @@ void multiplayer(){
 	std::vector<RectangleShape> lines = setLines();
 	
 	Font font;
-    if (!font.loadFromFile("arial.ttf")) {
-        std::cout << "Error loading font\n";
-        return;
-    }
+	font.loadFromFile("arial.ttf");
 	
 	set0();
 	    
@@ -158,17 +171,46 @@ void multiplayer(){
     		window.draw(lines[i]);
 		}
 		
+		bool empty = false;
+		
 		for(int i = 0; i < 9; i++){
 			if(squares[i].getString() == "X" || squares[i].getString() == "O"){
 				squares[i].setFont(font);
 				window.draw(squares[i]);	
 			}
+			else empty = true;
 		}
 		
-		if(testWin()){
-			RectangleShape win(Vector2f(250, 250));
-    		win.setPosition(200, 200);
-    		window.draw(win);
+		RectangleShape end(Vector2f(300, 300));
+    	end.setPosition(150, 150);
+    	
+    	Text message;
+		message.setFillColor(Color::Black);
+		message.setFont(font);
+    	
+		
+		if(testWin() == 1){
+    		window.draw(end);
+    		message.setCharacterSize(25);
+			message.setPosition(Vector2f(210, 280));
+    		message.setString("PLAYER 1 WINS");
+		}
+		else if(testWin() == 2){
+    		window.draw(end);
+    		message.setCharacterSize(25);
+			message.setPosition(Vector2f(210, 280));
+    		message.setString("PLAYER 2 WINS");
+		}
+		else if (!empty){
+			window.draw(end);
+			message.setCharacterSize(50);
+			message.setPosition(Vector2f(230, 280));
+			message.setString("DRAW");
+		}
+		
+		if (testWin() || !empty) 
+		{
+			window.draw(message);
 		}
 		
 		window.display();
@@ -179,11 +221,28 @@ int main()
 {
     RenderWindow window(VideoMode(600, 600), "Tic Tac Toe");
     
+    Font font;
+	font.loadFromFile("arial.ttf");
+    
     RectangleShape option1(Vector2f (400, 120));
     option1.setPosition(100, 120);
     
+    Text op1;
+	op1.setFillColor(Color::Black);
+	op1.setFont(font);
+	op1.setCharacterSize(25);
+	op1.setPosition(Vector2f(200, 160));
+    op1.setString("SINGLE PLAYER");
+    
     RectangleShape option2(Vector2f (400, 120));
     option2.setPosition(100, 360);
+    
+    Text op2;
+	op2.setFillColor(Color::Black);
+	op2.setFont(font);
+	op2.setCharacterSize(25);
+	op2.setPosition(Vector2f(210, 400));
+    op2.setString("MULTIPLAYER");
 
     while (window.isOpen())
     {
@@ -208,6 +267,8 @@ int main()
         window.clear();
         window.draw(option1);
         window.draw(option2);
+        window.draw(op1);
+        window.draw(op2);
         window.display();
     }
 
