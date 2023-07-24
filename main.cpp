@@ -116,6 +116,17 @@ int testWin(){
 	else return 0;
 }
 
+void setX(int i){
+	squares[i].setString("X");
+	count++;
+}
+
+void setY(int i){
+	squares[i].setString("O");
+	squares[i].setFillColor(Color::Red);
+	count++;
+}
+
 void multiplayer(){
 	RenderWindow window(VideoMode(600, 600), "Multiplayer Tic Tac Toe");
 	
@@ -166,19 +177,21 @@ void multiplayer(){
 				}
 			}
         }
+        
         window.clear();
+        
         for (int i = 0; i < 4; i++){
     		window.draw(lines[i]);
 		}
 		
-		bool empty = false;
+		int empty = 0;
 		
 		for(int i = 0; i < 9; i++){
 			if(squares[i].getString() == "X" || squares[i].getString() == "O"){
 				squares[i].setFont(font);
 				window.draw(squares[i]);	
 			}
-			else empty = true;
+			else empty++;
 		}
 		
 		RectangleShape end(Vector2f(300, 300));
@@ -201,16 +214,126 @@ void multiplayer(){
 			message.setPosition(Vector2f(210, 280));
     		message.setString("PLAYER 2 WINS");
 		}
-		else if (!empty){
+		else if (empty == 0){
 			window.draw(end);
 			message.setCharacterSize(50);
 			message.setPosition(Vector2f(230, 280));
 			message.setString("DRAW");
 		}
 		
-		if (testWin() || !empty) 
+		if (testWin() || empty == 0) 
 		{
 			window.draw(message);
+		}
+		
+		window.display();
+    }
+}
+
+void singleplayer(){
+	RenderWindow window(VideoMode(600, 600), "Single Player Tic Tac Toe");
+	
+	std::vector<RectangleShape> lines = setLines();
+	
+	Font font;
+	font.loadFromFile("arial.ttf");
+	
+	set0();
+	
+	while (window.isOpen()) {
+        Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == Event::Closed){
+                window.close();
+            }
+            else if (event.type == Event::MouseButtonPressed){
+            	if (event.mouseButton.button == Mouse::Left){
+            		Vector2i position = Mouse::getPosition(window);
+            		if (position.x >= 0 && position.x <= 195 && position.y >= 0 && position.y <= 195 && squares[0].getString() == "a"){
+	            		setX(0);
+					}
+					else if (position.x >= 205 && position.x <= 395 && position.y >= 0 && position.y <= 195 && squares[1].getString() == "b"){
+						setX(1);
+					}
+					else if (position.x >= 405 && position.x <= 595 && position.y >= 0 && position.y <= 195 && squares[2].getString() == "c"){
+						setX(2);
+					}
+					else if (position.x >= 0 && position.x <= 195 && position.y >= 205 && position.y <= 395 && squares[3].getString() == "d"){
+						setX(3);
+					}
+					else if (position.x >= 205 && position.x <= 395 && position.y >= 205 && position.y <= 395 && squares[4].getString() == "e"){
+						setX(4);
+					}
+					else if (position.x >= 405 && position.x <= 595 && position.y >= 205 && position.y <= 395 && squares[5].getString() == "f"){
+						setX(5);
+					}
+					else if (position.x >= 0 && position.x <= 195 && position.y >= 405 && position.y <= 595 && squares[6].getString() == "g"){
+						setX(6);
+					}
+					else if (position.x >= 205 && position.x <= 395 && position.y >= 405 && position.y <= 595 && squares[7].getString() == "h"){
+						setX(7);
+					}
+					else if (position.x >= 405 && position.x <= 595 && position.y >= 405 && position.y <= 595 && squares[8].getString() == "i"){
+						setX(8);
+					}
+				}
+			}
+        }
+        
+        window.clear();
+        
+        for (int i = 0; i < 4; i++){
+    		window.draw(lines[i]);
+		}
+		
+		int empty = 0;
+		std::vector<int> possible;
+		
+		for(int i = 0; i < 9; i++){
+			if(squares[i].getString() == "X" || squares[i].getString() == "O"){
+				squares[i].setFont(font);
+				window.draw(squares[i]);	
+			}
+			else {
+				empty++;
+				possible.push_back(i);
+			}
+		}
+		
+		RectangleShape end(Vector2f(300, 300));
+    	end.setPosition(150, 150);
+    	
+    	Text message;
+		message.setFillColor(Color::Black);
+		message.setFont(font);
+    	
+		
+		if(testWin() == 1){
+    		window.draw(end);
+    		message.setCharacterSize(25);
+			message.setPosition(Vector2f(210, 280));
+    		message.setString("PLAYER 1 WINS");
+    		window.draw(message);
+		}
+		else if(testWin() == 2){
+    		window.draw(end);
+    		message.setCharacterSize(25);
+			message.setPosition(Vector2f(210, 280));
+    		message.setString("PLAYER 2 WINS");
+    		window.draw(message);
+		}
+		else if (empty == 0){
+			window.draw(end);
+			message.setCharacterSize(50);
+			message.setPosition(Vector2f(230, 280));
+			message.setString("DRAW");
+			window.draw(message);
+		}
+		else if (count % 2 == 1){
+			int random = rand() % empty;
+            setY(possible[random]);
+            empty--;
 		}
 		
 		window.display();
@@ -255,7 +378,8 @@ int main()
             	if (event.mouseButton.button == Mouse::Left){
             		Vector2i position = Mouse::getPosition(window);
             		if (position.x >= 100 && position.x <= 500 && position.y >= 120 && position.y <= 240){
-            			option1.setFillColor(Color::Green);
+            			window.close();
+            			singleplayer();
 					}
 					else if (position.x >= 100 && position.x <= 500 && position.y >= 360 && position.y <= 480){
 						window.close();
