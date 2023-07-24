@@ -121,7 +121,59 @@ void setX(int i){
 	count++;
 }
 
-void setY(int i){
+void setY(std::vector<int> possible){
+	int random = rand() % possible.size();
+	int i = possible[random];
+	
+	if (squares[0].getString() == "O" && squares[1].getString() == "O" && squares[2].getString() == "c") i = 2;
+	else if (squares[1].getString() == "O" && squares[2].getString() == "O" && squares[0].getString() == "a") i = 0;
+	else if (squares[2].getString() == "O" && squares[0].getString() == "O" && squares[1].getString() == "b") i = 1;
+	else if (squares[3].getString() == "O" && squares[4].getString() == "O" && squares[5].getString() == "f") i = 5;
+	else if (squares[3].getString() == "O" && squares[4].getString() == "e" && squares[5].getString() == "O") i = 4;
+	else if (squares[3].getString() == "d" && squares[4].getString() == "O" && squares[5].getString() == "O") i = 3;
+	else if (squares[6].getString() == "O" && squares[7].getString() == "O" && squares[8].getString() == "i") i = 8;
+	else if (squares[6].getString() == "O" && squares[7].getString() == "h" && squares[8].getString() == "O") i = 7;
+	else if (squares[6].getString() == "g" && squares[7].getString() == "O" && squares[8].getString() == "O") i = 6;
+	else if (squares[0].getString() == "O" && squares[3].getString() == "O" && squares[6].getString() == "g") i = 6;
+	else if (squares[0].getString() == "O" && squares[3].getString() == "d" && squares[6].getString() == "O") i = 3;
+	else if (squares[0].getString() == "a" && squares[3].getString() == "O" && squares[6].getString() == "O") i = 0;
+	else if (squares[1].getString() == "O" && squares[4].getString() == "O" && squares[7].getString() == "f") i = 7;
+	else if (squares[1].getString() == "O" && squares[4].getString() == "e" && squares[7].getString() == "O") i = 4;
+	else if (squares[1].getString() == "b" && squares[4].getString() == "O" && squares[7].getString() == "O") i = 1;
+	else if (squares[2].getString() == "O" && squares[5].getString() == "O" && squares[8].getString() == "i") i = 8;
+	else if (squares[2].getString() == "O" && squares[5].getString() == "f" && squares[8].getString() == "O") i = 5;
+	else if (squares[2].getString() == "c" && squares[5].getString() == "O" && squares[8].getString() == "O") i = 2;
+	else if (squares[0].getString() == "O" && squares[4].getString() == "O" && squares[8].getString() == "i") i = 8;
+	else if (squares[0].getString() == "O" && squares[4].getString() == "e" && squares[8].getString() == "O") i = 4;
+	else if (squares[0].getString() == "a" && squares[4].getString() == "O" && squares[8].getString() == "O") i = 0;
+	else if (squares[2].getString() == "c" && squares[4].getString() == "O" && squares[6].getString() == "O") i = 2;
+	else if (squares[2].getString() == "O" && squares[4].getString() == "e" && squares[6].getString() == "O") i = 4;
+	else if (squares[2].getString() == "O" && squares[4].getString() == "O" && squares[6].getString() == "i") i = 8;
+	else if (squares[0].getString() == "X" && squares[1].getString() == "X" && squares[2].getString() == "c") i = 2;
+	else if (squares[1].getString() == "X" && squares[2].getString() == "X" && squares[0].getString() == "a") i = 0;
+	else if (squares[2].getString() == "X" && squares[0].getString() == "X" && squares[1].getString() == "b") i = 1;
+	else if (squares[3].getString() == "X" && squares[4].getString() == "X" && squares[5].getString() == "f") i = 5;
+	else if (squares[3].getString() == "X" && squares[4].getString() == "e" && squares[5].getString() == "X") i = 4;
+	else if (squares[3].getString() == "d" && squares[4].getString() == "X" && squares[5].getString() == "X") i = 3;
+	else if (squares[6].getString() == "X" && squares[7].getString() == "X" && squares[8].getString() == "i") i = 8;
+	else if (squares[6].getString() == "X" && squares[7].getString() == "h" && squares[8].getString() == "X") i = 7;
+	else if (squares[6].getString() == "g" && squares[7].getString() == "X" && squares[8].getString() == "X") i = 6;
+	else if (squares[0].getString() == "X" && squares[3].getString() == "X" && squares[6].getString() == "g") i = 6;
+	else if (squares[0].getString() == "X" && squares[3].getString() == "d" && squares[6].getString() == "X") i = 3;
+	else if (squares[0].getString() == "a" && squares[3].getString() == "X" && squares[6].getString() == "X") i = 0;
+	else if (squares[1].getString() == "X" && squares[4].getString() == "X" && squares[7].getString() == "f") i = 7;
+	else if (squares[1].getString() == "X" && squares[4].getString() == "e" && squares[7].getString() == "X") i = 4;
+	else if (squares[1].getString() == "b" && squares[4].getString() == "X" && squares[7].getString() == "X") i = 1;
+	else if (squares[2].getString() == "X" && squares[5].getString() == "X" && squares[8].getString() == "i") i = 8;
+	else if (squares[2].getString() == "X" && squares[5].getString() == "f" && squares[8].getString() == "X") i = 5;
+	else if (squares[2].getString() == "c" && squares[5].getString() == "X" && squares[8].getString() == "X") i = 2;
+	else if (squares[0].getString() == "X" && squares[4].getString() == "X" && squares[8].getString() == "i") i = 8;
+	else if (squares[0].getString() == "X" && squares[4].getString() == "e" && squares[8].getString() == "X") i = 4;
+	else if (squares[0].getString() == "a" && squares[4].getString() == "X" && squares[8].getString() == "X") i = 0;
+	else if (squares[2].getString() == "c" && squares[4].getString() == "X" && squares[6].getString() == "X") i = 2;
+	else if (squares[2].getString() == "X" && squares[4].getString() == "e" && squares[6].getString() == "X") i = 4;
+	else if (squares[2].getString() == "X" && squares[4].getString() == "X" && squares[6].getString() == "i") i = 8;
+
 	squares[i].setString("O");
 	squares[i].setFillColor(Color::Red);
 	count++;
@@ -331,9 +383,8 @@ void singleplayer(){
 			window.draw(message);
 		}
 		else if (count % 2 == 1){
-			int random = rand() % empty;
-            setY(possible[random]);
-            empty--;
+			setY(possible);
+			empty--;
 		}
 		
 		window.display();
