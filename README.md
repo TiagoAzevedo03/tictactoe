@@ -22,4 +22,4 @@ It allows users to perform simple arithmetic calculations.
 
 </br>
 
-![image](https://github.com/TiagoAzevedo03/tictactoe/assets/93865782/f9ea0df7-0c5b-4231-9de6-c65f535ebfdc)
+![image (1)](https://github.com/TiagoAzevedo03/tictactoe/assets/93865782/b66fbe04-6b3d-4a9f-9fc6-b5a7bf43cca4)
